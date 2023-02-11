@@ -5,6 +5,13 @@ Lightweight fault tolerance library written in Go Inspired by [resilience4j](htt
 ## Usage 
 
 ```go
+import (
+    "github.com/garugaru/resilience4go/circuitbreaker"
+    "github.com/garugaru/resilience4go/fallback"
+    "github.com/garugaru/resilience4go/resilience"
+    "github.com/garugaru/resilience4go/retry"
+)
+
 var executor = resilience.New[string](
 	// retry 10 times with a 10ms delay
     retry.New[string](retry.NewFixedDelay(10*time.Millisecond), 10),
