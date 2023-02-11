@@ -8,7 +8,6 @@ type RMiddlware[T any] interface {
 
 type Runner[T any] struct {
 	middlewares []RMiddlware[T]
-	composed    RFunc[T]
 }
 
 func New[T any](middlewares ...RMiddlware[T]) *Runner[T] {
