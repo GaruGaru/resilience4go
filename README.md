@@ -13,16 +13,16 @@ import (
 )
 
 var executor = resilience.New[string](
-	// retry 10 times with a 10ms delay
+    // retry 10 times with a 10ms delay
     retry.New[string](retry.NewFixedDelay(10*time.Millisecond), 10),
-	// circuit breaker based on error rate for the last 10 requests
+    // circuit breaker based on error rate for the last 10 requests
     circuitbreaker.New[string](circuitbreaker.NewCountBasedWindow(10), 0.5, 0.5, 100*time.Millisecond),
-	// if everything else fails, return a fallback value instead of error
+    // if everything else fails, return a fallback value instead of error
     fallback.New[string]("fallback"),
 )
 
 out, err := executor.Execute(func() (string, error) {
-    // failing function 
+        // failing function 
 	return callVeryBadExternalService()
 })
 ```
